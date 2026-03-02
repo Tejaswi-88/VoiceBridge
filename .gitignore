@@ -1,0 +1,86 @@
+##################################
+# ROOT LEVEL TXT FILES (DO NOT PUSH NOTES)
+##################################
+/*.txt
+
+##################################
+# PYTHON / FASTAPI (Backend)
+##################################
+
+# Virtual environments
+backend/venv/
+venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Pytest / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Backend cache folders
+backend/app/**/__pycache__/
+
+##################################
+# STORAGE (Uploaded Files / KB)
+##################################
+backend/storage/knowledge_files/
+
+##################################
+# NODE / NEXT.JS (Frontend)
+##################################
+
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/.turbo/
+frontend/dist/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+##################################
+# ENVIRONMENT VARIABLES
+##################################
+
+.env
+backend/.env
+frontend/.env.local
+frontend/.env.*
+
+##################################
+# VERCEL
+##################################
+
+.vercel
+
+##################################
+# OS / EDITOR JUNK
+##################################
+
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+
+##################################
+# TYPESCRIPT
+##################################
+
+*.tsbuildinfo
+
+##################################
+# MISC
+##################################
+
+*.log

@@ -1,0 +1,776 @@
+/* =========================
+   Theme Variables
+   ========================= */
+:root {
+  --font-family-base: 'Open Sans', sans-serif;
+
+  /* Brand Colors */
+  --brand-voice-color: #ffffff;
+  --brand-bridge-color: #7DE2D1;
+
+  --primary-color: #6FFFE9;
+  --secondary-color: #5BC0BE;
+  --third-color: #3A506B;
+  --fourth-color: #1C2541;
+  --fifth-color: #0B132B;
+  --sixth-color: #706B6B;
+
+  --primary-dark:#131515;
+  --secondary-dark:#FFFAFB;
+
+  --heading1-color:#FFFAFB;
+  --heading2-color: #131515;
+  --heading3-color:#2B2C28;
+  --heading4-color:#339989;
+
+  /* Primary Theme Colors */
+  --primary-bg: #7DE2D1;
+  --primary-text: #2B2C28;
+  --primary-border: #339989;
+
+  /* Secondary Theme Colors */
+  --secondary-bg: #2B2C28;
+  --secondary-text: #7DE2D1;
+  --secondary-border: #FFFAFB;
+
+  /* Card Colors */
+  --card-bg: #1F2937;
+  --card-text: #F9FAFB;
+  --card-border: #374151;
+  --card-muted-text: #D1D5DB;
+
+  --card-bg2: #FFFFFF;
+  --card-text2: #111827;
+  --card-border2: #E5E7EB;
+  --card-muted-text2: #6B7280;
+
+  /* Circle Colors */
+  --circle-bg: #339989;
+  --circle-border: #fff;
+  --circle-icon-color: #fff;
+
+}
+
+/* =========================
+   Global Styles
+   ========================= */
+html { scroll-behavior: smooth; }
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: var(--font-family-base);
+}
+
+.bg-third {
+  background-color: var(--sixth-color);
+}
+
+/* Brand */
+.brand-voice {
+  color: var(--brand-voice-color);
+  font-family: 'Comic Neue', cursive;
+}
+
+.brand-bridge {
+  color: var(--brand-bridge-color);
+  font-family: 'Comic Neue', cursive;
+}
+
+.global1-bg-dark {
+    background-color: var(--primary-dark);
+}
+.global2-bg-dark {
+    background-color: var(--secondary-dark);
+}
+.h1-color{
+    color: var(--heading1-color);
+}
+.h2-color{
+    color: var(--heading2-color);
+}
+.h3-color{
+    color: var(--heading3-color);
+}
+.h4-color{
+    color: var(--heading4-color);
+}
+
+
+/* =========================
+   Navbar Styles
+   ========================= */
+
+.navbar {
+  background-color: var(--primary-dark) !important;
+  border-bottom: 2px solid var(--primary-border);
+  padding: 0.75rem 1.5rem;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.navbar:hover {
+  background-color: #0f1111; /* slightly darker hover */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+/* Brand */
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.navbar-brand .brand-voice {
+  color: var(--brand-voice-color);
+  font-family: 'Comic Neue', cursive;
+}
+
+.navbar-brand .brand-bridge {
+  color: var(--brand-bridge-color);
+  font-family: 'Comic Neue', cursive;
+}
+
+/* Nav links */
+.navbar-nav .nav-link {
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0 0.5rem;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+  color: var(--brand-bridge-color) !important;
+}
+
+.navbar-nav .nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background-color: var(--brand-bridge-color);
+  transition: width 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover::after {
+  width: 100%;
+}
+
+/* Toggler */
+.navbar-toggler {
+  border: none;
+}
+
+.navbar-toggler:focus {
+  box-shadow: none;
+}
+
+/* Buttons in navbar */
+.navbar .btn {
+  font-size: 0.9rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: 0.4rem;
+}
+
+.navbar .btn-primary-custom {
+  background-color: var(--primary-bg);
+  color: var(--primary-text);
+  border: 2px solid var(--primary-border);
+}
+
+.navbar .btn-primary-custom:hover {
+  background-color: var(--primary-text);
+  color: var(--primary-bg);
+}
+
+.navbar .btn-secondary-custom {
+  background-color: var(--secondary-bg);
+  color: var(--secondary-text);
+  border: 2px solid var(--secondary-border);
+}
+
+.navbar .btn-secondary-custom:hover {
+  background-color: var(--secondary-text);
+  color: var(--secondary-bg);
+}
+
+-------
+
+
+.nav-pills .nav-link:not(.active) {
+  color: #333 !important; /* dark text for inactive tabs */
+  background-color: #f8f9fa !important;
+  border: 1px solid #dee2e6 !important;
+}
+
+.nav-pills .nav-link.active {
+  color: #fff !important; /* white text for active tab */
+  background-color: var(--secondary-color) !important;
+  border-color: var(--secondary-color) !important;
+}
+
+.nav-pills .nav-link:hover:not(.active) {
+  background-color: #e9ecef !important;
+  color: #000 !important;
+}
+
+
+
+/* Primary Button */
+.btn-primary-custom {
+  background-color: var(--primary-bg);
+  color: var(--primary-text);
+  border: 2px solid var(--primary-border);
+  border-radius: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-primary-custom:hover {
+  background-color: var(--primary-text);
+  color: var(--primary-bg);
+  border-color: var(--primary-border);
+}
+
+/* Secondary Button */
+.btn-secondary-custom {
+  background-color: var(--secondary-bg);
+  color: var(--secondary-text);
+  border: 2px solid var(--secondary-border);
+  border-radius: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary-custom:hover {
+  background-color: var(--secondary-text);
+  border-color: var(--secondary-bg);
+  border: 2px solid var(--secondary-bg);
+}
+
+/* Custom Card */
+.card-custom {
+  background-color: var(--card-bg);
+  color: var(--card-text);
+  border: 2px solid var(--card-border);
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-custom .card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--card-text);
+}
+
+.card-custom .card-text {
+  font-size: 0.95rem;
+  color: var(--card-muted-text);
+}
+
+
+.card-custom2 {
+  background-color: var(--card-bg2);
+  color: var(--card-text2);
+  border: 2px solid var(--card-border2);
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-custom2 .card-title2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--card-text2);
+}
+
+.card-custom2 .card-text2 {
+  font-size: 0.95rem;
+  color: var(--card-muted-text2);
+}
+
+.card-custom:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.35);
+  border-color: var(--circle-bg);
+}
+
+.card-custom2:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.35);
+  border-color: var(--circle-bg);
+}
+
+/* Circle Icon */
+.circle-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: var(--circle-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--circle-icon-color);
+  font-size: 1.5rem;
+  border: 2px solid var(--circle-border);
+}
+
+
+
+
+/* globals.css */
+.scroll-fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.scroll-fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+
+
+/* =========================
+   Signup Page Styles
+   ========================= */
+
+/* Centered card form */
+.signup-card {
+  background-color: var(--card-bg2);
+  border: 2px solid var(--card-border2);
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  padding: 2rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.signup-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+}
+
+/* Heading */
+.signup-card h3 {
+  color: var(--heading2-color);
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+/* Inputs */
+.signup-card .form-control,
+.signup-card .form-select {
+  border: 2px solid var(--card-border2);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.signup-card .form-control:focus,
+.signup-card .form-select:focus {
+  border-color: var(--primary-border);
+  box-shadow: 0 0 0 0.2rem rgba(51, 153, 137, 0.25);
+}
+
+/* Button */
+.signup-card .btn-success {
+  background-color: var(--primary-bg);
+  color: var(--primary-text);
+  border: 2px solid var(--primary-border);
+  border-radius: 0.5rem;
+  font-weight: 600;
+  padding: 0.75rem;
+  transition: all 0.3s ease;
+}
+
+.signup-card .btn-success:hover {
+  background-color: var(--primary-text);
+  color: var(--primary-bg);
+  border-color: var(--primary-border);
+}
+
+
+
+/* Signup wrapper */
+.signup-wrapper {
+  background-color: var(--primary-dark);
+  min-height: 100vh;
+}
+
+/* Responsive select styling */
+.form-select {
+  width: 100%;                /* always full width of parent */
+  padding: 0.75rem 1rem;       /* comfortable touch area */
+  font-size: 1rem;             /* readable text */
+  border: 2px solid var(--card-border2);
+  border-radius: 0.5rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-label {
+  font-weight: 600;          /* bold but not heavy */
+  color: var(--primary-dark);            /* soft light text for dark bg */
+  margin-bottom: 6px;
+  font-size: 1rem;
+  display: block;
+  letter-spacing: 0.3px;
+}
+
+.form-select:focus {
+  border-color: var(--primary-border);
+  box-shadow: 0 0 0 0.2rem rgba(51, 153, 137, 0.25);
+}
+
+/* Smaller devices adjustments */
+@media (max-width: 576px) {
+  .form-select {
+    font-size: 0.9rem;
+    padding: 0.6rem 0.9rem;
+  }
+}
+
+
+
+/* Chatbot side */
+/* Chatbot container */
+.chatbot-side {
+  background-color: var(--secondary-dark);
+  position: relative;
+  overflow: hidden;
+}
+
+.chatbot-css {
+  position: relative;
+  width: 200px;
+  animation: floaty 6s ease-in-out infinite;
+  text-align: center;
+}
+
+/* Head */
+.bot-head {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  background-color: #fff;
+  border-radius: 50%;
+  margin: 0 auto;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+/* Eyes */
+.eye {
+  position: absolute;
+  top: 40%;
+  width: 20px;
+  height: 20px;
+  background-color: var(--fourth-color);
+  border-radius: 50%;
+  animation: blink 4s infinite;
+}
+
+.left-eye {
+  left: 25px;
+}
+
+.right-eye {
+  right: 25px;
+}
+
+/* Antenna */
+.antenna {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 20px;
+  background-color: #339989;
+  border-radius: 3px;
+}
+
+/* Body */
+.bot-body {
+  position: relative;
+  margin-top: 10px;
+}
+
+.chest {
+  width: 100px;
+  height: 60px;
+  background-color: var(--secondary-color);
+  border-radius: 20px;
+  margin: 0 auto;
+  border: 2px solid var(--secondary-color);
+}
+
+/* Arms */
+.arm {
+  position: absolute;
+  top: 0;
+  width: 20px;
+  height: 60px;
+  background-color: #339989;
+  border-radius: 10px;
+  border: 2px solid var(--secondary-color);
+}
+
+.static-arm {
+  left: -30px;
+}
+
+.waving-arm {
+  right: -30px;
+  transform-origin: top center;
+  animation: wave 2s infinite ease-in-out;
+}
+
+/* Chat bubble */
+.chatbot-side {
+  background-color: var(--primary-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Bot container */
+.chatbot-css {
+  position: relative;
+  animation: floatBot 4s ease-in-out infinite;
+}
+
+/* Floating animation */
+@keyframes floatBot {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+/* Head */
+.bot-head {
+  width: 180px;
+  height: 140px;
+  background: #ffffff;
+  border-radius: 80px;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  border: 2px solid var(--secondary-color);
+}
+
+/* Visor */
+.visor {
+  width: 140px;
+  height: 80px;
+  background: linear-gradient(135deg, var(--third-color), var(--primary-color));
+  border-radius: 50px;
+  margin: 30px auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+/* Eyes */
+.eye {
+  width: 16px;
+  height: 16px;
+  background: var(--fourth-color);
+  border-radius: 50%;
+  animation: blink 4s infinite;
+}
+
+@keyframes blink {
+  0%, 90%, 100% { transform: scaleY(1); }
+  92% { transform: scaleY(0.1); }
+}
+
+/* Antenna */
+.antenna {
+  width: 10px;
+  height: 30px;
+  background: var(--secondary-color);
+  position: absolute;
+  top: -28px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 10px;
+  border: 2px solid var(--secondary-color);
+}
+
+/* Body */
+.bot-body {
+  width: 160px;
+  height: 160px;
+  background: #ffffff;
+  margin: 10px auto;
+  border-radius: 50%;
+  position: relative;
+  border: 2px solid var(--secondary-color);
+}
+
+/* Chest */
+.chest {
+  width: 70px;
+  height: 50px;
+  background: var(--secondary-color);
+  position: absolute;
+  top: 55px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 20px;
+  border: 2px solid var(--secondary-color);
+}
+
+/* Arms */
+.arm {
+  width: 22px;
+  height: 90px;
+  background: #ffffff;
+  position: absolute;
+  top: 30px;
+  border-radius: 20px;
+  border: 2px solid var(--secondary-color);
+}
+
+/* Waving arm */
+.waving-arm {
+  right: -18px;
+  transform-origin: top center;
+  animation: wave 2s infinite;
+}
+
+@keyframes wave {
+  0% { transform: rotate(0deg); }
+  50% { transform: rotate(35deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* Static arm */
+.static-arm {
+  left: -18px;
+}
+
+/* Chat bubble */
+.chat-bubble {
+  position: absolute;
+  top: -120px;
+  right: -30px;
+  background: white;
+  padding: 15px 20px;
+  border-radius: 20px;
+  font-size: 14px;
+  color: #0a2a66;
+  width: 180px;
+  animation: bubblePop 3s infinite;
+}
+
+/* Bubble tail */
+.chat-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 30px;
+  width: 20px;
+  height: 20px;
+  background: white;
+  transform: rotate(45deg);
+}
+
+/* Bubble animation */
+@keyframes bubblePop {
+  0%, 100% { opacity: 0.8; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+
+/*ALert*/
+.alert {
+  animation: slideIn 0.4s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
+/* Sidebar */
+.sidebar {
+  width: 260px;
+  min-height: 100vh;
+  position: sticky;
+  top: 0;
+}
+
+/* Links */
+.sidebar-link {
+  color: #e6e6e6;
+  font-weight: 500;
+  transition: background-color 0.2s ease, padding-left 0.2s ease;
+}
+
+.sidebar-link:hover {
+  background-color: #343a40;
+  padding-left: 20px;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.active-link {
+  background-color: #198754;
+  color: #ffffff !important;
+  font-weight: 700;
+  padding-left: 20px;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    min-height: auto;
+    position: relative;
+  }
+}
+
+
+
+
+.typing-dots span {
+  animation: blink 1.4s infinite both;
+  font-size: 24px;
+  line-height: 1;
+}
+
+.typing-dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes blink {
+  0% { opacity: 0.2; }
+  20% { opacity: 1; }
+  100% { opacity: 0.2; }
+}
