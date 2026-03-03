@@ -318,7 +318,7 @@ Run frontend:
 bash
 npm run dev
 Frontend runs at: http://localhost:3000
-``
+```
 
 ## 🧠 AI Pipeline Explained
 Knowledge Ingestion
