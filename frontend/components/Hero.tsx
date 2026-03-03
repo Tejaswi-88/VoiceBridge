@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 interface IconPosition {
   top: number;
@@ -31,6 +32,7 @@ const icons = [
 
 export default function Hero() {
   const [positions, setPositions] = useState<IconPosition[]>([]);
+  const router = useRouter();
 
   useEffect(() => {
     const generated = Array.from({ length: icons.length }, () => ({
@@ -80,7 +82,8 @@ export default function Hero() {
           multilingual support, 24/7 availability, and privacy-first design.
         </p>
         <div className="d-flex justify-content-center gap-5 mt-4 flex-wrap py-3">
-          <button className="btn btn-primary-custom btn-lg px-4 py-2 me-3">
+          <button className="btn btn-primary-custom btn-lg px-4 py-2 me-3" onClick={() => router.push("/login")}
+          >
             Try Voice Assistant
           </button>
           <button className="btn btn-secondary-custom btn-lg px-4 py-2"><b>

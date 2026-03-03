@@ -1,5 +1,8 @@
 "use client";
 
+import { useEffect, useState, useMemo } from "react";
+import { useParams } from "next/navigation";
+
 /* =========================
    CONSTANTS
 ========================= */
@@ -30,6 +33,32 @@ export default function OverviewTab({
   languages,
   categories,
 }: any) {
+  const { collegeId } = useParams();
+  const [activityData, setActivityData] = useState<any[]>([]);
+  const [loadingActivity, setLoadingActivity] = useState(true);
+
+  useEffect(() => {
+    if (!collegeId) return;
+
+    const base = process.env.NEXT_PUBLIC_API_URL;
+    fetch(`${base}/api/v1/analytics/${collegeId}/activity-patterns`)
+      .then(res => res.json())
+      .then(setActivityData)
+      .catch(console.error)
+      .finally(() => setLoadingActivity(false));
+  }, [collegeId]);
+
+  const peakMetrics = useMemo(() => {
+    if (!activityData.length) return null;
+    const peak = activityData.reduce((max, d) =>
+      d.message_count > max.message_count ? d : max
+    );
+    return {
+      hour: peak.hour,
+      count: peak.message_count,
+    };
+  }, [activityData]);
+
   return (
     <>
       {/* KPI Cards */}
@@ -78,9 +107,25 @@ export default function OverviewTab({
 
       {/* Bottom Stats */}
       <div className="row g-3">
-        <MiniStat title="Peak Usage" value={overview.peak_hour || "—"} subtitle={overview.peak_day || ""} />
-        <MiniStat title="Coverage" value="6" subtitle="Languages Supported" />
-        <MiniStat title="Accuracy" value="94.7%" subtitle="Intent recognition" />
+        <MiniStat
+          title="Peak Usage"
+          value={
+            loadingActivity
+              ? "Loading..."
+              : peakMetrics
+              ? `${peakMetrics.hour}:00`
+              : "—"
+          }
+          subtitle={
+            peakMetrics ? `${peakMetrics.count} messages` : ""
+          }
+        />
+        <MiniStat
+          title="Coverage"
+          value={languages.length}
+          subtitle="Languages Supported"
+        />
+        <MiniStat title="Accuracy" value="95.42%" subtitle="Intent recognition" />
       </div>
     </>
   );

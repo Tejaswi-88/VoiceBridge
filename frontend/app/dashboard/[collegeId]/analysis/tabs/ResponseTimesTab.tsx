@@ -58,7 +58,10 @@ export default function ResponseTimesTab() {
 
     let status = "Optimal";
     if (overallAvg < 2000) status = "Excellent";
-    else if (overallAvg > 5000) status = "Needs Optimization";
+    else if (overallAvg >= 2000 && overallAvg <= 5000) status = "Optimal";
+    else if (overallAvg > 5000 && overallAvg <= 8000) status = "Needs Optimization";
+    else if (overallAvg > 8000 && overallAvg <= 10000) status = "Critical";
+    else if (overallAvg > 10000) status = "Severe Degradation"; 
 
     return {
       totalMessages,
@@ -67,6 +70,7 @@ export default function ResponseTimesTab() {
       status,
     };
   }, [data]);
+
 
   if (loading) {
     return <div className="py-4 text-muted">Loading response analytics…</div>;
@@ -124,17 +128,21 @@ export default function ResponseTimesTab() {
                   width: `${Math.min(metrics.overallAvg / 100, 100)}%`,
                   backgroundColor:
                     metrics.overallAvg < 2000
-                      ? "#2e7d32"
-                      : metrics.overallAvg > 5000
-                      ? "#c62828"
-                      : "#ef6c00",
+                      ? "#2e7d32"   // Excellent (green)
+                      : metrics.overallAvg <= 5000
+                      ? "#ef6c00"   // Optimal (orange)
+                      : metrics.overallAvg <= 8000
+                      ? "#c62828"   // Needs Optimization (red)
+                      : metrics.overallAvg <= 10000
+                      ? "#6a1b9a"   // Critical (purple)
+                      : "#000000",  // Severe Degradation (black)
                 }}
               />
             </div>
 
             <small className="text-muted mt-2 d-block">
-              Benchmark: &lt;2000ms Excellent | 2000–5000ms Acceptable |
-              &gt;5000ms Needs Optimization
+              Benchmark: &lt;2000ms Excellent | 2000–5000ms Optimal | 
+              5000–8000ms Needs Optimization | 8000–10000ms Critical | &gt;10000ms Severe Degradation
             </small>
           </div>
         </div>

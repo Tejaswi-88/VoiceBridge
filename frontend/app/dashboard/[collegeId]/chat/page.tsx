@@ -166,8 +166,8 @@ export default function ChatPage() {
 
       {/* Header */}
       <div className="mb-2">
-        <h5 className="mb-0">Chat Assistant</h5>
-        <small className="text-muted">
+        <h2 className="display-6 fw-bold">Chat Assistant</h2>
+        <small className="text-muted mb-0">
           {loadingConvo
             ? "Initializing conversation..."
             : "College knowledge assistant"}
@@ -183,8 +183,15 @@ export default function ChatPage() {
               msg.sender === "user"
                 ? "justify-content-end"
                 : "justify-content-start"
-            }`}
+            } align-items-center`}
           >
+            {/* Circle + Icon */}
+            {msg.sender === "bot" && (
+              <div className="me-2 d-flex align-items-center justify-content-center rounded-circle bg-secondary text-white" style={{ width: "40px", height: "40px" }}>
+                <i className="bi bi-robot"></i>
+              </div>
+            )}
+
             <div
               className={`px-3 py-2 rounded-3 shadow-sm ${
                 msg.sender === "user"
@@ -195,10 +202,17 @@ export default function ChatPage() {
             >
               {msg.isTyping ? <TypingDots /> : msg.text}
             </div>
+
+            {msg.sender === "user" && (
+              <div className="ms-2 d-flex align-items-center justify-content-center rounded-circle bg-primary text-white" style={{ width: "40px", height: "40px" }}>
+                <i className="bi bi-person"></i>
+              </div>
+            )}
           </div>
         ))}
         <div ref={messagesEndRef} />
       </div>
+
 
       {/* Input Section */}
       <div className="mt-3 border rounded p-2 d-flex align-items-end gap-2 bg-white shadow-sm">

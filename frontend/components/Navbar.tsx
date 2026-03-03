@@ -29,12 +29,12 @@ export default function Navbar() {
         </ul>
 
         <div className="d-flex gap-2">
-          <Link href="/login" className="btn btn-secondary-custom btn-sm">
+          <Link href="/login" className="btn btn-primary-custom btn-sm">
             Login
           </Link>
-          <Link href="/signup" className="btn btn-primary-custom btn-sm">
+          {/*<Link href="/signup" className="btn btn-primary-custom btn-sm">
             Sign up
-          </Link>
+          </Link>*/}
         </div>
       </div>
     </nav>

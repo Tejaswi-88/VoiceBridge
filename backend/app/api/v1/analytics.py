@@ -5,6 +5,8 @@ from sqlalchemy import func
 from datetime import datetime, timedelta
 from sqlalchemy import cast, Date, extract
 
+from app.models.user import User
+
 from app.db.session import SessionLocal
 from app.models.language_usage import LanguageUsage
 from app.models.category_usage import CategoryUsage
@@ -271,3 +273,152 @@ def get_activity_patterns(college_id: UUID, db: Session = Depends(get_db)):
         }
         for r in rows
     ]
+
+
+@router.get("/{college_id}/role-insights")
+def get_role_insights(college_id: UUID, db: Session = Depends(get_db)):
+
+    # ---------------------------------------
+    # 1️⃣ Conversations per Role
+    # ---------------------------------------
+    conversations = (
+        db.query(
+            ChatConversation.role_id,
+            func.count(ChatConversation.id).label("count")
+        )
+        .filter(ChatConversation.college_id == college_id)
+        .group_by(ChatConversation.role_id)
+        .all()
+    )
+
+    # ---------------------------------------
+    # 2️⃣ Messages per Role
+    # ---------------------------------------
+    messages = (
+        db.query(
+            ChatConversation.role_id,
+            func.count(ChatMessage.id).label("count")
+        )
+        .join(ChatConversation, ChatConversation.id == ChatMessage.conversation_id)
+        .filter(ChatConversation.college_id == college_id)
+        .group_by(ChatConversation.role_id)
+        .all()
+    )
+
+    # ---------------------------------------
+    # 3️⃣ Category Distribution Per Role
+    # ---------------------------------------
+    category_per_role = (
+        db.query(
+            ChatConversation.role_id,
+            ChatMessage.category,
+            func.count(ChatMessage.id).label("count")
+        )
+        .join(ChatConversation, ChatConversation.id == ChatMessage.conversation_id)
+        .filter(
+            ChatConversation.college_id == college_id,
+            ChatMessage.category.isnot(None)
+        )
+        .group_by(ChatConversation.role_id, ChatMessage.category)
+        .all()
+    )
+
+    # ---------------------------------------
+    # 4️⃣ Global Top 10 Questions
+    # ---------------------------------------
+    top_questions = (
+        db.query(
+            ChatMessage.message,
+            func.count(ChatMessage.id).label("count")
+        )
+        .join(ChatConversation, ChatConversation.id == ChatMessage.conversation_id)
+        .filter(
+            ChatConversation.college_id == college_id,
+            ChatMessage.sender == "user"
+        )
+        .group_by(ChatMessage.message)
+        .order_by(func.count(ChatMessage.id).desc())
+        .limit(10)
+        .all()
+    )
+
+    # ---------------------------------------
+    # 5️⃣ Top 5 Questions Per Role
+    # ---------------------------------------
+    # Step 1: get distinct roles
+    roles = (
+        db.query(ChatConversation.role_id)
+        .filter(ChatConversation.college_id == college_id)
+        .distinct()
+        .all()
+    )
+
+    top_questions_per_role = []
+
+    for role in roles:
+        role_id = role.role_id
+
+        role_questions = (
+            db.query(
+                ChatMessage.message,
+                func.count(ChatMessage.id).label("count")
+            )
+            .join(ChatConversation, ChatConversation.id == ChatMessage.conversation_id)
+            .filter(
+                ChatConversation.college_id == college_id,
+                ChatConversation.role_id == role_id,
+                ChatMessage.sender == "user"
+            )
+            .group_by(ChatMessage.message)
+            .order_by(func.count(ChatMessage.id).desc())
+            .limit(5)
+            .all()
+        )
+
+        for rq in role_questions:
+            top_questions_per_role.append({
+                "role_id": role_id,
+                "question": rq.message,
+                "count": rq.count
+            })
+
+    # ---------------------------------------
+    # RESPONSE
+    # ---------------------------------------
+
+    return {
+        "conversations_per_role": [
+            {
+                "role_id": r.role_id,
+                "count": r.count
+            }
+            for r in conversations
+        ],
+
+        "messages_per_role": [
+            {
+                "role_id": r.role_id,
+                "count": r.count
+            }
+            for r in messages
+        ],
+
+        "category_per_role": [
+            {
+                "role_id": r.role_id,
+                "category": r.category,
+                "count": r.count
+            }
+            for r in category_per_role
+        ],
+
+        "top_questions": [
+            {
+                "question": r.message,
+                "count": r.count
+            }
+            for r in top_questions
+        ],
+
+        "top_questions_per_role": top_questions_per_role
+    }

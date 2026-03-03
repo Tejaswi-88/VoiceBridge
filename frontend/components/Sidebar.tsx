@@ -54,7 +54,7 @@ export default function Sidebar({ collegeId }: { collegeId: string }) {
   const adminMenu = [
     { name: "Chat", path: "chat", icon: "bi-chat-left-text" }, // ✅ ADDED
     { name: "Analysis", path: "analysis", icon: "bi-graph-up" },
-    { name: "Conversation Logs", path: "logs", icon: "bi-chat-dots" },
+    { name: "Role Insights", path: "logs", icon: "bi-chat-dots" },
     { name: "Knowledge Base", path: "kb", icon: "bi-journal-text" },
     { name: "FAQ Management", path: "faq", icon: "bi-question-circle" },
     { name: "Contact Management", path: "contacts", icon: "bi-people" },
