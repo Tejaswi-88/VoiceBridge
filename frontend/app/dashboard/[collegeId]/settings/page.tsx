@@ -6,6 +6,7 @@ import CollegeProfile from "./tabs/CollegeProfile";
 import MyProfile from "./tabs/MyProfile";
 import UserManagement from "./tabs/UserManagement";
 import Security from "./tabs/Security";
+import SystemPreferences from "./tabs/SystemPreferences";
 
 /* ---------------- TYPES ---------------- */
 
@@ -116,13 +117,7 @@ export default function SettingsPage() {
             <Security />
           )}
 
-          {activeTab === "system" && isAdmin && (
-            <Placeholder
-              title="System Preferences"
-              text="Configure global system behavior"
-              icon="bi-sliders"
-            />
-          )}
+          {activeTab === "system" && isAdmin && <SystemPreferences />}
 
         </div>
       </div>
